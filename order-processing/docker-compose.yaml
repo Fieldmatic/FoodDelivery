@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  mongodb-orders:
+    image: mongo
+    container_name: mongodb-orders
+    ports:
+      - "127.0.0.1:27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: bringit
+    restart: unless-stopped
+    volumes:
+      - ./mongo-init-scripts:/docker-entrypoint-initdb.d
+  order-processing:
+    container_name: order-processing
+    build:
+      context: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8083:8083"

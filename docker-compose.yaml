@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  backoffice-mysql:
+    extends:
+      file: ./backoffice/docker-compose.yaml
+      service: backoffice-mysql
+    volumes:
+      - /var/lib/mysql
+
+  backoffice:
+    extends:
+      file: ./backoffice/docker-compose.yaml
+      service: backoffice
+    depends_on:
+      - backoffice-mysql
+
+  mongodb-orders:
+    extends:
+      file: ./order-processing/docker-compose.yaml
+      service: mongodb-orders
+    volumes:
+      - /data/db
+
+  order-processing:
+    extends:
+      file: ./order-processing/docker-compose.yaml
+      service: order-processing
+    depends_on:
+      - mongodb-orders
+
+  elastic-orders:
+    extends:
+      file: ./order-search/docker-compose.yaml
+      service: elastic-orders
+    volumes:
+      - /usr/share/elasticsearch/data
+
+  order-search:
+    extends:
+      file: ./order-search/docker-compose.yaml
+      service: order-search
+    depends_on:
+      - elastic-orders
+
+  bringit-api:
+    extends:
+      file: ./api/docker-compose.yaml
+      service: bringit-api
+    depends_on:
+      - backoffice
+      - order-processing
+      - order-search

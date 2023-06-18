@@ -1,0 +1,12 @@
+server:
+  port: 8082
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:backoffice-mysql}:${MYSQL_PORT:3306}/backoffice
+    username: ${MYSQL_USER:bringit}
+    password: ${MYSQL_PASSWORD:bringit} # Password is configured here for demonstration purposes only, this is not a good practice

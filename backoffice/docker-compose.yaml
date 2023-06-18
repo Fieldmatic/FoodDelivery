@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  backoffice-mysql:
+    image: mysql/mysql-server
+    container_name: backoffice-mysql
+    ports:
+      - "127.0.0.1:3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: backoffice
+      MYSQL_USER: bringit
+      MYSQL_PASSWORD: bringit
+    restart: unless-stopped
+  backoffice:
+    container_name: backoffice
+    build:
+      context: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8082:8082"

@@ -1,0 +1,13 @@
+server:
+  port: 8081
+
+clients:
+  back-office:
+    host: ${BACK_OFFICE_HOST:backoffice}
+    port: ${BACK_OFFICE_PORT:8082}
+  order-processing:
+    host: ${ORDER_PROCESSING_HOST:order-processing}
+    port: ${ORDER_PROCESSIONG_PORT:8083}
+  order-search:
+    host: ${ORDER_SEARCH_HOST:order-search}
+    port: ${ORDER_SEARCH_PORT:8084}

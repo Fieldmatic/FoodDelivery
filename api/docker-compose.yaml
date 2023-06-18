@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  bringit-api:
+    container_name: bringit
+    build:
+      context: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8081:8081"
